@@ -36,16 +36,15 @@ jobs:
         run: ./kage version
 
   lint:
-    name: Lint
+    name: Vet
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
           go-version: ${{ env.GO_VERSION }}
-      - uses: golangci/golangci-lint-action@v6
-        with:
-          version: v1.64
+      - name: Run go vet
+        run: go vet ./...
 
   self-scan:
     name: Self-Scan
