@@ -1,6 +1,6 @@
 # Binaries
-kage
-kage.exe
+/kage
+/kage.exe
 *.exe
 *.test
 *.out
