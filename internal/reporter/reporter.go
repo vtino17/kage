@@ -16,6 +16,8 @@ func Format(result *model.ScanResult, format string) (string, error) {
 		return formatJSON(result)
 	case "sarif":
 		return formatSARIF(result)
+	case "html":
+		return formatHTML(result)
 	case "terminal":
 		return formatTerminal(result)
 	default:

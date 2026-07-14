@@ -46,7 +46,7 @@ Examples:
 	cmd.Flags().StringVar(&scanDir, "dir", "", "Target directory (default: use argument)")
 	cmd.Flags().BoolVar(&scanFix, "fix", false, "Create GitHub PR with auto-generated fixes")
 	cmd.Flags().BoolVar(&scanCI, "ci", false, "CI mode: exit 1 if findings exist")
-	cmd.Flags().StringVar(&scanFormat, "format", "terminal", "Output format: terminal, json, sarif")
+	cmd.Flags().StringVar(&scanFormat, "format", "terminal", "Output format: terminal, json, sarif, html")
 	cmd.Flags().BoolVar(&scanAI, "ai", false, "Enable AI-powered analysis and fix generation")
 	cmd.Flags().StringVar(&scanProvider, "ai-provider", "", "AI provider override (openai, anthropic, gemini, ollama)")
 
