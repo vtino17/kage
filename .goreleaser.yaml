@@ -1,0 +1,60 @@
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: kage
+    main: ./cmd/kage
+    binary: kage
+    ldflags:
+      - -s -w -X github.com/vtino17/kage/internal/cli.CommitSHA={{.ShortCommit}} -X github.com/vtino17/kage/internal/cli.Version={{.Version}}
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: windows
+        goarch: arm64
+
+archives:
+  - id: kage-archive
+    formats: ["tar.gz"]
+    format_overrides:
+      - goos: windows
+        format: zip
+    name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}_{{.Arch}}"
+    files:
+      - README.md
+      - LICENSE
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  name_template: "{{.Version}}-SNAPSHOT-{{.ShortCommit}}"
+
+changelog:
+  sort: asc
+  use: github
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^ci:"
+
+release:
+  github:
+    owner: vtino17
+    name: kage
+  header: |
+    ## KAGE {{.Version}}
+
+    AI-powered security scanner and fixer.
+
+  footer: |
+    **Full Changelog**: https://github.com/vtino17/kage/compare/{{.PreviousTag}}...{{.Tag}}
