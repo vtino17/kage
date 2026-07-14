@@ -1,6 +1,6 @@
 module github.com/vtino17/kage
 
-go 1.25.4
+go 1.25.0
 
 require (
 	github.com/google/go-github/v69 v69.2.0

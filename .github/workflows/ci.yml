@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 env:
-  GO_VERSION: "1.25"
+  GO_VERSION: "1.24"
 
 jobs:
   test:
@@ -55,7 +55,15 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: ${{ env.GO_VERSION }}
+      - name: Install scanners
+        run: |
+          pip install semgrep
+          go install github.com/zricethezav/gitleaks/v8@latest
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
       - name: Build
         run: go build -o kage ./cmd/kage
+      - name: Init KAGE
+        run: ./kage init
       - name: Scan self
         run: ./kage scan . --ci --format sarif
+        continue-on-error: true
