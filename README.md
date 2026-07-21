@@ -1,5 +1,12 @@
 # KAGE - AI-Powered Security Scanner and Fixer
 
+[![Go](https://img.shields.io/github/go-mod/go-version/vtino17/kage?style=flat-square&logo=go)](https://github.com/vtino17/kage)
+[![CI](https://img.shields.io/github/actions/workflow/status/vtino17/kage/ci.yml?style=flat-square&label=CI)](https://github.com/vtino17/kage/actions)
+[![Release](https://img.shields.io/github/v/release/vtino17/kage?style=flat-square&logo=github)](https://github.com/vtino17/kage/releases)
+[![License](https://img.shields.io/github/license/vtino17/kage?style=flat-square)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/vtino17/kage?style=flat-square&logo=github)](https://github.com/vtino17/kage/stargazers)
+[![Docker](https://img.shields.io/badge/docker-ready-2496ED?style=flat-square&logo=docker)](https://github.com/vtino17/kage/pkgs/container/kage)
+
 KAGE is an open-source CLI tool that scans your codebase for security vulnerabilities, explains risks in plain language, and can automatically generate fixes.
 
 ## Features
