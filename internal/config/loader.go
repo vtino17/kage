@@ -64,6 +64,16 @@ func Save(cfg *Config) error {
 	if err := os.MkdirAll(dir, 0700); err != nil {
 		return fmt.Errorf("failed to create config dir: %w", err)
 	}
+	file, err := os.OpenFile(configPath, os.O_CREATE|os.O_WRONLY, 0600)
+	if err != nil {
+		return fmt.Errorf("failed to create protected config: %w", err)
+	}
+	if err := file.Close(); err != nil {
+		return fmt.Errorf("failed to close protected config: %w", err)
+	}
+	if err := os.Chmod(configPath, 0600); err != nil {
+		return fmt.Errorf("failed to protect config permissions: %w", err)
+	}
 
 	v := viper.New()
 	v.SetConfigFile(configPath)
@@ -75,6 +85,9 @@ func Save(cfg *Config) error {
 
 	if err := v.WriteConfig(); err != nil {
 		return fmt.Errorf("failed to write config: %w", err)
+	}
+	if err := os.Chmod(configPath, 0600); err != nil {
+		return fmt.Errorf("failed to protect config permissions: %w", err)
 	}
 
 	return nil

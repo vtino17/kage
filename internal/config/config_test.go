@@ -43,8 +43,15 @@ func TestSaveAndLoad(t *testing.T) {
 	}
 
 	configPath := filepath.Join(tmpDir, ".kage", "config.json")
-	if _, err := os.Stat(configPath); os.IsNotExist(err) {
+	info, err := os.Stat(configPath)
+	if os.IsNotExist(err) {
 		t.Fatal("config file was not created")
+	}
+	if err != nil {
+		t.Fatalf("failed to stat config file: %v", err)
+	}
+	if got := info.Mode().Perm(); got != 0600 {
+		t.Errorf("config file permissions = %o, want 600", got)
 	}
 
 	loaded, err := Load()
