@@ -64,7 +64,7 @@ func Save(cfg *Config) error {
 	if err := os.MkdirAll(dir, 0700); err != nil {
 		return fmt.Errorf("failed to create config dir: %w", err)
 	}
-	file, err := os.OpenFile(configPath, os.O_CREATE|os.O_WRONLY, 0600)
+	file, err := os.OpenFile(configPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0600)
 	if err != nil {
 		return fmt.Errorf("failed to create protected config: %w", err)
 	}
