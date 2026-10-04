@@ -35,7 +35,7 @@ go install github.com/vtino17/kage/cmd/kage@latest
 ### Docker
 
 ```bash
-docker run ghcr.io/vtino17/kage scan ./project
+docker run --rm -v "$PWD":/project -w /project ghcr.io/vtino17/kage scan ./project
 ```
 
 ## Quick Start
